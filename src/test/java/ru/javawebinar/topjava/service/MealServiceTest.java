@@ -81,8 +81,11 @@ public class MealServiceTest {
 
     @Test
     public void update() {
+        System.out.println("here0");
         Meal updated = getUpdated();
+        System.out.println("here1");
         service.update(updated, USER_ID);
+        System.out.println("hear2");
         MEAL_MATCHER.assertMatch(service.get(MEAL1_ID, USER_ID), getUpdated());
     }
 

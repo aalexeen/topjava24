@@ -1,6 +1,8 @@
 package ru.javawebinar.topjava;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.ClassUtils;
+
 
 public class Profiles {
     public static final String
@@ -15,6 +17,7 @@ public class Profiles {
             HSQL_DB = "hsqldb";
 
     //  Get DB profile depending of DB driver in classpath
+    @Value("${activeDbProfile}")
     public static String getActiveDbProfile() {
         if (ClassUtils.isPresent("org.postgresql.Driver", null)) {
             return POSTGRES_DB;

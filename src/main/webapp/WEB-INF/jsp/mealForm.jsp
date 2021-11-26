@@ -4,7 +4,8 @@
 <html>
 <head>
     <title>Meal</title>
-    <link rel="stylesheet" href="css/style.css">
+    <%--<link rel="stylesheet" href="css/style.css">--%>
+    <jsp:include page="fragments/headTag.jsp" />
 </head>
 <body>
 <section>

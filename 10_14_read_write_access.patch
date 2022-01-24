@@ -1,0 +1,228 @@
+Index: src/main/java/ru/javawebinar/topjava/model/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ru/javawebinar/topjava/model/User.java b/src/main/java/ru/javawebinar/topjava/model/User.java
+--- a/src/main/java/ru/javawebinar/topjava/model/User.java	(revision 934b373ea23fb73c5e7eccce2927058841bef8a5)
++++ b/src/main/java/ru/javawebinar/topjava/model/User.java	(date 1639603971950)
+@@ -1,10 +1,11 @@
+ package ru.javawebinar.topjava.model;
+ 
++import com.fasterxml.jackson.annotation.JsonManagedReference;
++import com.fasterxml.jackson.annotation.JsonProperty;
+ import org.hibernate.annotations.Cache;
+ import org.hibernate.annotations.*;
+ import org.hibernate.validator.constraints.Range;
+ import org.springframework.util.CollectionUtils;
+-import com.fasterxml.jackson.annotation.JsonManagedReference;
+ 
+ import javax.persistence.Entity;
+ import javax.persistence.NamedQueries;
+@@ -43,6 +44,8 @@
+     @Column(name = "password", nullable = false)
+     @NotBlank
+     @Size(min = 5, max = 100)
++    // https://stackoverflow.com/a/12505165/548473
++    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+     private String password;
+ 
+     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
+@@ -50,6 +53,7 @@
+ 
+     @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()", updatable = false)
+     @NotNull
++    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+     private Date registered = new Date();
+ 
+     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+Index: src/test/java/ru/javawebinar/topjava/UserTestData.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/ru/javawebinar/topjava/UserTestData.java b/src/test/java/ru/javawebinar/topjava/UserTestData.java
+--- a/src/test/java/ru/javawebinar/topjava/UserTestData.java	(revision 934b373ea23fb73c5e7eccce2927058841bef8a5)
++++ b/src/test/java/ru/javawebinar/topjava/UserTestData.java	(date 1639603978127)
+@@ -2,6 +2,7 @@
+ 
+ import ru.javawebinar.topjava.model.Role;
+ import ru.javawebinar.topjava.model.User;
++import ru.javawebinar.topjava.web.json.JsonUtil;
+ 
+ import java.util.Collections;
+ import java.util.Date;
+@@ -47,4 +48,8 @@
+         updated.setRoles(Collections.singletonList(Role.ADMIN));
+         return updated;
+     }
++
++    public static String jsonWithPassword(User user, String passw) {
++        return JsonUtil.writeAdditionProps(user, "password", passw);
++    }
+ }
+Index: src/test/java/ru/javawebinar/topjava/web/user/AdminRestControllerTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/ru/javawebinar/topjava/web/user/AdminRestControllerTest.java b/src/test/java/ru/javawebinar/topjava/web/user/AdminRestControllerTest.java
+--- a/src/test/java/ru/javawebinar/topjava/web/user/AdminRestControllerTest.java	(revision 934b373ea23fb73c5e7eccce2927058841bef8a5)
++++ b/src/test/java/ru/javawebinar/topjava/web/user/AdminRestControllerTest.java	(date 1639604170536)
+@@ -5,12 +5,10 @@
+ import org.springframework.http.MediaType;
+ import org.springframework.test.web.servlet.ResultActions;
+ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+-import ru.javawebinar.topjava.UserTestData;
+ import ru.javawebinar.topjava.model.User;
+ import ru.javawebinar.topjava.service.UserService;
+ import ru.javawebinar.topjava.util.exception.NotFoundException;
+ import ru.javawebinar.topjava.web.AbstractControllerTest;
+-import ru.javawebinar.topjava.web.json.JsonUtil;
+ 
+ import static org.junit.jupiter.api.Assertions.assertFalse;
+ import static org.junit.jupiter.api.Assertions.assertThrows;
+@@ -91,7 +89,7 @@
+         perform(MockMvcRequestBuilders.put(REST_URL + USER_ID)
+                 .contentType(MediaType.APPLICATION_JSON)
+                 .with(userHttpBasic(admin))
+-                .content(JsonUtil.writeValue(updated)))
++                .content(jsonWithPassword(updated, updated.getPassword())))
+                 .andExpect(status().isNoContent());
+ 
+         USER_MATCHER.assertMatch(userService.get(USER_ID), updated);
+@@ -103,7 +101,7 @@
+         ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL)
+                 .contentType(MediaType.APPLICATION_JSON)
+                 .with(userHttpBasic(admin))
+-                .content(JsonUtil.writeValue(newUser)))
++                .content(jsonWithPassword(newUser, newUser.getPassword())))
+                 .andExpect(status().isCreated());
+ 
+         User created = USER_MATCHER.readFromJson(action);
+Index: src/main/java/ru/javawebinar/topjava/web/json/JsonUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ru/javawebinar/topjava/web/json/JsonUtil.java b/src/main/java/ru/javawebinar/topjava/web/json/JsonUtil.java
+--- a/src/main/java/ru/javawebinar/topjava/web/json/JsonUtil.java	(revision 934b373ea23fb73c5e7eccce2927058841bef8a5)
++++ b/src/main/java/ru/javawebinar/topjava/web/json/JsonUtil.java	(date 1639603971956)
+@@ -1,10 +1,12 @@
+ package ru.javawebinar.topjava.web.json;
+ 
+ import com.fasterxml.jackson.core.JsonProcessingException;
++import com.fasterxml.jackson.core.type.TypeReference;
+ import com.fasterxml.jackson.databind.ObjectReader;
+ 
+ import java.io.IOException;
+ import java.util.List;
++import java.util.Map;
+ 
+ import static ru.javawebinar.topjava.web.json.JacksonObjectMapper.getMapper;
+ 
+@@ -34,4 +36,14 @@
+             throw new IllegalStateException("Invalid write to JSON:\n'" + obj + "'", e);
+         }
+     }
++
++    public static <T> String writeAdditionProps(T obj, String addName, Object addValue) {
++        return writeAdditionProps(obj, Map.of(addName, addValue));
++    }
++
++    public static <T> String writeAdditionProps(T obj, Map<String, Object> addProps) {
++        Map<String, Object> map = getMapper().convertValue(obj, new TypeReference<>() {});
++        map.putAll(addProps);
++        return writeValue(map);
++    }
+ }
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/AuthorizedUser.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ru/javawebinar/topjava/AuthorizedUser.java b/src/main/java/ru/javawebinar/topjava/AuthorizedUser.java
+--- a/src/main/java/ru/javawebinar/topjava/AuthorizedUser.java	(revision 934b373ea23fb73c5e7eccce2927058841bef8a5)
++++ b/src/main/java/ru/javawebinar/topjava/AuthorizedUser.java	(date 1639603971972)
+@@ -14,14 +14,15 @@
+ 
+     public AuthorizedUser(User user) {
+         super(user.getEmail(), user.getPassword(), user.isEnabled(), true, true, true, user.getRoles());
+-        this.userTo = UserUtil.asTo(user);
++        setTo(UserUtil.asTo(user));
+     }
+ 
+     public int getId() {
+         return userTo.id();
+     }
+ 
+-    public void update(UserTo newTo) {
++    public void setTo(UserTo newTo) {
++        newTo.setPassword(null);
+         userTo = newTo;
+     }
+ 
+Index: src/test/java/ru/javawebinar/topjava/web/json/JsonUtilTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/ru/javawebinar/topjava/web/json/JsonUtilTest.java b/src/test/java/ru/javawebinar/topjava/web/json/JsonUtilTest.java
+--- a/src/test/java/ru/javawebinar/topjava/web/json/JsonUtilTest.java	(revision 934b373ea23fb73c5e7eccce2927058841bef8a5)
++++ b/src/test/java/ru/javawebinar/topjava/web/json/JsonUtilTest.java	(date 1639604043904)
+@@ -2,13 +2,17 @@
+ 
+ import org.junit.jupiter.api.Test;
+ import ru.javawebinar.topjava.MealTestData;
++import ru.javawebinar.topjava.UserTestData;
+ import ru.javawebinar.topjava.model.Meal;
++import ru.javawebinar.topjava.model.User;
+ 
+ import java.util.List;
+ 
+-import static ru.javawebinar.topjava.MealTestData.MEAL_MATCHER;
+-import static ru.javawebinar.topjava.MealTestData.adminMeal1;
+-import static ru.javawebinar.topjava.MealTestData.meals;
++import static org.hamcrest.CoreMatchers.containsString;
++import static org.hamcrest.CoreMatchers.not;
++import static org.hamcrest.MatcherAssert.assertThat;
++import static org.junit.jupiter.api.Assertions.assertEquals;
++import static ru.javawebinar.topjava.MealTestData.*;
+ 
+ class JsonUtilTest {
+ 
+@@ -27,4 +31,15 @@
+         List<Meal> meals = JsonUtil.readValues(json, Meal.class);
+         MEAL_MATCHER.assertMatch(meals, MealTestData.meals);
+     }
++
++    @Test
++    void writeOnlyAccess() {
++        String json = JsonUtil.writeValue(UserTestData.user);
++        System.out.println(json);
++        assertThat(json, not(containsString("password")));
++        String jsonWithPass = UserTestData.jsonWithPassword(UserTestData.user, "newPass");
++        System.out.println(jsonWithPass);
++        User user = JsonUtil.readValue(jsonWithPass, User.class);
++        assertEquals(user.getPassword(), "newPass");
++    }
+ }
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/web/user/ProfileUIController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ru/javawebinar/topjava/web/user/ProfileUIController.java b/src/main/java/ru/javawebinar/topjava/web/user/ProfileUIController.java
+--- a/src/main/java/ru/javawebinar/topjava/web/user/ProfileUIController.java	(revision 934b373ea23fb73c5e7eccce2927058841bef8a5)
++++ b/src/main/java/ru/javawebinar/topjava/web/user/ProfileUIController.java	(date 1639603971966)
+@@ -27,7 +27,7 @@
+             return "profile";
+         } else {
+             super.update(userTo, SecurityUtil.authUserId());
+-            SecurityUtil.get().update(userTo);
++            SecurityUtil.get().setTo(userTo);
+             status.setComplete();
+             return "redirect:/meals";
+         }

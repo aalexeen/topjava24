@@ -1,0 +1,66 @@
+2021-10-16 21:28:41,679 INFO  AdminRestController [AbstractUserController.java:31] create User (id=null, email=email@mail.ru, name=userName, enabled=true, roles=[ADMIN], caloriesPerDay=2000)
+2021-10-16 21:28:41,685 INFO  InMemoryUserRepository [InMemoryUserRepository.java:24] save User (id=null, email=email@mail.ru, name=userName, enabled=true, roles=[ADMIN], caloriesPerDay=2000)
+2021-10-17 21:35:11,856 INFO  AdminRestController [AbstractUserController.java:31] create User (id=null, email=email@mail.ru, name=userName, enabled=true, roles=[ADMIN], caloriesPerDay=2000)
+2021-10-17 21:35:11,861 INFO  InMemoryUserRepository [InMemoryUserRepository.java:24] save User (id=null, email=email@mail.ru, name=userName, enabled=true, roles=[ADMIN], caloriesPerDay=2000)
+2021-10-23 19:23:54,824 INFO  AdminRestController [AbstractUserController.java:31] create User (id=null, email=email@mail.ru, name=userName, enabled=true, roles=[ADMIN], caloriesPerDay=2000)
+2021-10-23 19:23:54,925 INFO  InMemoryUserRepository [InMemoryUserRepository.java:33] save User (id=null, email=email@mail.ru, name=userName, enabled=true, roles=[ADMIN], caloriesPerDay=2000)
+2021-10-23 19:23:54,927 INFO  MealRestController [AbstractMealController.java:31] create Meal{id=null, userId=1, dateTime=2020-01-30T10:00, description='Завтрак', calories=500}
+2021-10-23 19:25:41,983 INFO  AdminRestController [AbstractUserController.java:31] create User (id=null, email=email@mail.ru, name=userName, enabled=true, roles=[ADMIN], caloriesPerDay=2000)
+2021-10-23 19:25:41,990 INFO  InMemoryUserRepository [InMemoryUserRepository.java:33] save User (id=null, email=email@mail.ru, name=userName, enabled=true, roles=[ADMIN], caloriesPerDay=2000)
+2021-10-23 19:25:41,990 INFO  MealRestController [AbstractMealController.java:31] create Meal{id=null, userId=1, dateTime=2020-01-30T10:00, description='Завтрак1', calories=500}
+2021-10-23 19:25:59,736 INFO  AdminRestController [AbstractUserController.java:31] create User (id=null, email=email@mail.ru, name=userName, enabled=true, roles=[ADMIN], caloriesPerDay=2000)
+2021-10-23 19:25:59,741 INFO  InMemoryUserRepository [InMemoryUserRepository.java:33] save User (id=null, email=email@mail.ru, name=userName, enabled=true, roles=[ADMIN], caloriesPerDay=2000)
+2021-10-23 19:25:59,742 INFO  MealRestController [AbstractMealController.java:31] create Meal{id=null, userId=1, dateTime=2020-01-31T10:00, description='Завтрак1', calories=500}
+2021-10-23 20:16:39,318 INFO  InMemoryMealRepository [InMemoryMealRepository.java:33] save
+2021-10-23 20:16:39,323 INFO  InMemoryMealRepository [InMemoryMealRepository.java:33] save
+2021-10-23 20:16:39,323 INFO  InMemoryMealRepository [InMemoryMealRepository.java:33] save
+2021-10-23 20:16:39,323 INFO  InMemoryMealRepository [InMemoryMealRepository.java:33] save
+2021-10-23 20:16:39,324 INFO  InMemoryMealRepository [InMemoryMealRepository.java:33] save
+2021-10-23 20:16:39,324 INFO  InMemoryMealRepository [InMemoryMealRepository.java:33] save
+2021-10-23 20:16:39,324 INFO  InMemoryMealRepository [InMemoryMealRepository.java:33] save
+2021-10-23 20:16:39,391 INFO  AdminRestController [AbstractUserController.java:31] create User (id=null, email=email@mail.ru, name=userName, enabled=true, roles=[ADMIN], caloriesPerDay=2000)
+2021-10-23 20:16:39,394 INFO  InMemoryUserRepository [InMemoryUserRepository.java:33] save User (id=null, email=email@mail.ru, name=userName, enabled=true, roles=[ADMIN], caloriesPerDay=2000)
+2021-10-23 20:16:39,395 INFO  MealRestController [AbstractMealController.java:23] getAll
+2021-10-23 20:16:39,395 INFO  MealService [MealService.java:36] getAll
+2021-10-23 20:16:39,395 INFO  InMemoryMealRepository [InMemoryMealRepository.java:61] getAll
+2021-10-23 20:17:45,441 INFO  InMemoryMealRepository [InMemoryMealRepository.java:33] save
+2021-10-23 20:17:45,446 INFO  InMemoryMealRepository [InMemoryMealRepository.java:33] save
+2021-10-23 20:17:45,447 INFO  InMemoryMealRepository [InMemoryMealRepository.java:33] save
+2021-10-23 20:17:45,447 INFO  InMemoryMealRepository [InMemoryMealRepository.java:33] save
+2021-10-23 20:17:45,448 INFO  InMemoryMealRepository [InMemoryMealRepository.java:33] save
+2021-10-23 20:17:45,448 INFO  InMemoryMealRepository [InMemoryMealRepository.java:33] save
+2021-10-23 20:17:45,448 INFO  InMemoryMealRepository [InMemoryMealRepository.java:33] save
+2021-10-23 20:17:45,514 INFO  AdminRestController [AbstractUserController.java:31] create User (id=null, email=email@mail.ru, name=userName, enabled=true, roles=[ADMIN], caloriesPerDay=2000)
+2021-10-23 20:17:45,518 INFO  InMemoryUserRepository [InMemoryUserRepository.java:33] save User (id=null, email=email@mail.ru, name=userName, enabled=true, roles=[ADMIN], caloriesPerDay=2000)
+2021-10-23 20:17:45,519 INFO  MealRestController [AbstractMealController.java:23] getAll
+2021-10-23 20:17:45,519 INFO  MealService [MealService.java:36] getAll
+2021-10-23 20:17:45,519 INFO  InMemoryMealRepository [InMemoryMealRepository.java:61] getAll
+2021-10-24 18:34:02,458 INFO  InMemoryMealRepository [InMemoryMealRepository.java:48] +++ PostConstruct
+2021-10-24 18:34:02,641 INFO  InMemoryAdminRestControllerTest [InMemoryAdminRestControllerTest.java:26] 
+[inMemoryMealRepository, inMemoryUserRepository, org.springframework.context.annotation.internalConfigurationAnnotationProcessor, org.springframework.context.annotation.internalAutowiredAnnotationProcessor, org.springframework.context.annotation.internalCommonAnnotationProcessor, org.springframework.context.event.internalEventListenerProcessor, org.springframework.context.event.internalEventListenerFactory, mealService, userService, mealRestController, adminRestController, profileRestController]
+
+2021-10-24 18:34:02,649 INFO  AdminRestController [AbstractUserController.java:37] delete 1
+2021-10-24 18:34:02,656 INFO  AdminRestController [AbstractUserController.java:37] delete 10
+2021-10-24 18:34:02,660 INFO  InMemoryMealRepository [InMemoryMealRepository.java:53] +++ PreDestroy
+2021-10-24 18:34:46,537 INFO  InMemoryMealRepository [InMemoryMealRepository.java:48] +++ PostConstruct
+2021-10-24 18:34:46,602 INFO  InMemoryAdminRestControllerTest [InMemoryAdminRestControllerTest.java:26] 
+[inMemoryMealRepository, inMemoryUserRepository, org.springframework.context.annotation.internalConfigurationAnnotationProcessor, org.springframework.context.annotation.internalAutowiredAnnotationProcessor, org.springframework.context.annotation.internalCommonAnnotationProcessor, org.springframework.context.event.internalEventListenerProcessor, org.springframework.context.event.internalEventListenerFactory, mealService, userService, mealRestController, adminRestController, profileRestController]
+
+2021-10-24 18:34:46,613 INFO  AdminRestController [AbstractUserController.java:37] delete 1
+2021-10-24 18:34:46,619 INFO  AdminRestController [AbstractUserController.java:37] delete 10
+2021-10-24 18:34:46,622 INFO  InMemoryMealRepository [InMemoryMealRepository.java:53] +++ PreDestroy
+2021-10-24 18:35:08,716 INFO  InMemoryMealRepository [InMemoryMealRepository.java:48] +++ PostConstruct
+2021-10-24 18:35:08,793 INFO  InMemoryAdminRestControllerTest [InMemoryAdminRestControllerTest.java:26] 
+[inMemoryMealRepository, inMemoryUserRepository, org.springframework.context.annotation.internalConfigurationAnnotationProcessor, org.springframework.context.annotation.internalAutowiredAnnotationProcessor, org.springframework.context.annotation.internalCommonAnnotationProcessor, org.springframework.context.event.internalEventListenerProcessor, org.springframework.context.event.internalEventListenerFactory, mealService, userService, mealRestController, adminRestController, profileRestController]
+
+2021-10-24 18:35:08,807 INFO  AdminRestController [AbstractUserController.java:37] delete 1
+2021-10-24 18:35:08,814 INFO  AdminRestController [AbstractUserController.java:37] delete 10
+2021-10-24 18:35:08,817 INFO  InMemoryMealRepository [InMemoryMealRepository.java:53] +++ PreDestroy
+2021-10-24 18:46:42,862 INFO  DefaultTestContextBootstrapper [AbstractTestContextBootstrapper.java:245] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2021-10-24 18:46:42,885 INFO  DefaultTestContextBootstrapper [AbstractTestContextBootstrapper.java:174] Using TestExecutionListeners: [org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@378542de, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@3738449f, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@69e1dd28, org.springframework.test.context.support.DirtiesContextTestExecutionListener@11bd0f3b, org.springframework.test.context.event.EventPublishingTestExecutionListener@c333c60]
+2021-10-24 18:46:43,446 INFO  InMemoryMealRepository [InMemoryMealRepository.java:48] +++ PostConstruct
+2021-10-24 18:46:43,529 INFO  AdminRestController [AbstractUserController.java:37] delete 1
+2021-10-24 18:46:43,541 INFO  AdminRestController [AbstractUserController.java:37] delete 10
+2021-10-24 18:46:43,548 INFO  InMemoryMealRepository [InMemoryMealRepository.java:53] +++ PreDestroy
+2021-10-24 21:42:23,039 INFO  DefaultTestContextBootstrapper [AbstractTestContextBootstrapper.java:245] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2021-10-24 21:42:23,076 INFO  DefaultTestContextBootstrapper [AbstractTestContextBootstrapper.java:174] Using TestExecutionListeners: [org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4bb33f74, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@759d26fb, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@3c73951, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3d5c822d, org.springframework.test.context.transaction.TransactionalTestExecutionListener@6f46426d, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73700b80, org.springframework.test.context.event.EventPublishingTestExecutionListener@49c7b90e]

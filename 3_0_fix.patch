@@ -1,0 +1,60 @@
+Index: README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/README.md b/README.md
+--- a/README.md	(revision f483875b6834eb94c26f62ac456ab8f318ca53ca)
++++ b/README.md	(date 1634766351245)
+@@ -56,7 +56,7 @@
+ #### Начало выполнения [выпускного проекта](https://github.com/JavaOPs/topjava/blob/master/graduation.md)
+ 
+ ### 04.11: 5-е занятие
+-- Обзор JDK 9/11. Миграция Topjava с 1.8 на 11
++- Обзор JDK 9/17. Миграция Topjava с 1.8 на 17
+ - Разбор вопросов
+ - Разбор домашнего задания HW4 + Optional
+ - Транзакции
+Index: src/main/java/ru/javawebinar/topjava/model/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ru/javawebinar/topjava/model/User.java b/src/main/java/ru/javawebinar/topjava/model/User.java
+--- a/src/main/java/ru/javawebinar/topjava/model/User.java	(revision f483875b6834eb94c26f62ac456ab8f318ca53ca)
++++ b/src/main/java/ru/javawebinar/topjava/model/User.java	(date 1634766421502)
+@@ -79,13 +79,13 @@
+ 
+     @Override
+     public String toString() {
+-        return "User (" +
++        return "User{" +
+                 "id=" + id +
+                 ", email=" + email +
+                 ", name=" + name +
+                 ", enabled=" + enabled +
+                 ", roles=" + roles +
+                 ", caloriesPerDay=" + caloriesPerDay +
+-                ')';
++                '}';
+     }
+ }
+\ No newline at end of file
+Index: src/main/webapp/meals.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/meals.jsp b/src/main/webapp/meals.jsp
+--- a/src/main/webapp/meals.jsp	(revision f483875b6834eb94c26f62ac456ab8f318ca53ca)
++++ b/src/main/webapp/meals.jsp	(date 1634766376955)
+@@ -33,8 +33,7 @@
+             <th></th>
+         </tr>
+         </thead>
+-        <c:forEach items="${meals}" var="meal">
+-            <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.MealTo"/>
++        <c:forEach items="${requestScope.meals}" var="meal">
+             <tr class="${meal.excess ? 'excess' : 'normal'}">
+                 <td>
+                         <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>

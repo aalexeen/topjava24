@@ -1,0 +1,34 @@
+Index: README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/README.md b/README.md
+--- a/README.md	(revision 5aa6d53807207ea364277dea18c053a0cd5ce5e6)
++++ b/README.md	(date 1637911061858)
+@@ -73,7 +73,7 @@
+ - Разбор домашнего задания HW5 + Optional
+ - Кэш Hibernate
+ - Spring Web
+-- JPS, JSTL, internationalization
++- JSP, JSTL, internationalization
+ - Динамическое изменение профиля при запуске
+ - Конфигурирование Tomcat через maven plugin. Jndi-lookup
+ - Spring Web MVC
+Index: src/main/webapp/resources/css/style.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/resources/css/style.css b/src/main/webapp/resources/css/style.css
+--- a/src/main/webapp/resources/css/style.css	(revision 5aa6d53807207ea364277dea18c053a0cd5ce5e6)
++++ b/src/main/webapp/resources/css/style.css	(date 1637911421596)
+@@ -19,7 +19,7 @@
+     color: green;
+ }
+ 
+-tr[data-mealExcess="true"] {
++tr[data-meal-excess="true"] {
+     color: red;
+ }
+ 

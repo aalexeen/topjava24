@@ -1,0 +1,111 @@
+Index: src/main/java/ru/javawebinar/topjava/model/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ru/javawebinar/topjava/model/User.java b/src/main/java/ru/javawebinar/topjava/model/User.java
+--- a/src/main/java/ru/javawebinar/topjava/model/User.java	(revision 75999579bf299bd29aa045035d9b8f02e3b9faad)
++++ b/src/main/java/ru/javawebinar/topjava/model/User.java	(date 1637786986383)
+@@ -47,7 +47,7 @@
+     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
+     private boolean enabled = true;
+ 
+-    @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()")
++    @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()", updatable = false)
+     @NotNull
+     private Date registered = new Date();
+ 
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision 75999579bf299bd29aa045035d9b8f02e3b9faad)
++++ b/pom.xml	(date 1637786986382)
+@@ -1,5 +1,5 @@
+ <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
++         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+     <modelVersion>4.0.0</modelVersion>
+ 
+     <groupId>ru.javawebinar</groupId>
+Index: src/main/java/ru/javawebinar/topjava/web/RootController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ru/javawebinar/topjava/web/RootController.java b/src/main/java/ru/javawebinar/topjava/web/RootController.java
+--- a/src/main/java/ru/javawebinar/topjava/web/RootController.java	(revision 75999579bf299bd29aa045035d9b8f02e3b9faad)
++++ b/src/main/java/ru/javawebinar/topjava/web/RootController.java	(date 1637786986386)
+@@ -1,5 +1,7 @@
+ package ru.javawebinar.topjava.web;
+ 
++import org.slf4j.Logger;
++import org.slf4j.LoggerFactory;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Controller;
+ import org.springframework.ui.Model;
+@@ -11,16 +13,20 @@
+ 
+ @Controller
+ public class RootController {
++    private static final Logger log = LoggerFactory.getLogger(RootController.class);
++
+     @Autowired
+     private UserService service;
+ 
+     @GetMapping("/")
+     public String root() {
++        log.info("root");
+         return "index";
+     }
+ 
+     @GetMapping("/users")
+     public String getUsers(Model model) {
++        log.info("users");
+         model.addAttribute("users", service.getAll());
+         return "users";
+     }
+@@ -28,6 +34,7 @@
+     @PostMapping("/users")
+     public String setUser(HttpServletRequest request) {
+         int userId = Integer.parseInt(request.getParameter("userId"));
++        log.info("setUser {}", userId);
+         SecurityUtil.setAuthUserId(userId);
+         return "redirect:meals";
+     }
+Index: src/main/webapp/resources/css/style.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/resources/css/style.css b/src/main/webapp/resources/css/style.css
+--- a/src/main/webapp/resources/css/style.css	(revision 75999579bf299bd29aa045035d9b8f02e3b9faad)
++++ b/src/main/webapp/resources/css/style.css	(date 1637769867528)
+@@ -15,7 +15,7 @@
+     vertical-align: top;
+ }
+ 
+-tr[data-mealExcess="false"] {
++tr[data-meal-excess="false"] {
+     color: green;
+ }
+ 
+Index: src/main/webapp/WEB-INF/jsp/meals.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/jsp/meals.jsp b/src/main/webapp/WEB-INF/jsp/meals.jsp
+--- a/src/main/webapp/WEB-INF/jsp/meals.jsp	(revision 75999579bf299bd29aa045035d9b8f02e3b9faad)
++++ b/src/main/webapp/WEB-INF/jsp/meals.jsp	(date 1637786986389)
+@@ -46,7 +46,7 @@
+         </tr>
+         </thead>
+         <c:forEach items="${requestScope.meals}" var="meal">
+-            <tr data-mealExcess="${meal.excess}">
++            <tr data-meal-excess="${meal.excess}">
+                 <td>
+                         <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
+                         <%--<%=TimeUtil.toString(meal.getDateTime())%>--%>

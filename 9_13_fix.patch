@@ -1,0 +1,38 @@
+Index: src/main/java/ru/javawebinar/topjava/model/AbstractBaseEntity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ru/javawebinar/topjava/model/AbstractBaseEntity.java b/src/main/java/ru/javawebinar/topjava/model/AbstractBaseEntity.java
+--- a/src/main/java/ru/javawebinar/topjava/model/AbstractBaseEntity.java	(revision aeb1ca912456e1bb350e4e3233ff3c6d10de4df3)
++++ b/src/main/java/ru/javawebinar/topjava/model/AbstractBaseEntity.java	(date 1639044372060)
+@@ -38,12 +38,6 @@
+         return id;
+     }
+ 
+-    // doesn't work for hibernate lazy proxy
+-    public int id() {
+-        Assert.notNull(id, "Entity must have id");
+-        return id;
+-    }
+-
+     @Override
+     public String toString() {
+         return getClass().getSimpleName() + ":" + id;
+Index: src/test/java/ru/javawebinar/topjava/service/AbstractServiceTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/ru/javawebinar/topjava/service/AbstractServiceTest.java b/src/test/java/ru/javawebinar/topjava/service/AbstractServiceTest.java
+--- a/src/test/java/ru/javawebinar/topjava/service/AbstractServiceTest.java	(revision aeb1ca912456e1bb350e4e3233ff3c6d10de4df3)
++++ b/src/test/java/ru/javawebinar/topjava/service/AbstractServiceTest.java	(date 1639044372071)
+@@ -17,7 +17,7 @@
+ })
+ //@ExtendWith(SpringExtension.class)
+ @ActiveProfiles(resolver = ActiveDbProfileResolver.class)
+-@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
++@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"), executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+ @ExtendWith(TimingExtension.class)
+ public abstract class AbstractServiceTest {
+ 
